@@ -1,4 +1,4 @@
-package com.mkyong.web.controller;
+package com.sjc.hrms.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

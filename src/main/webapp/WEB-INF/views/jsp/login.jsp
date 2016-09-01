@@ -23,13 +23,13 @@
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<table>
 			<tr>
-				<td>Customer Name :</td>
-				<td><form:input path="userName" /></td>
+				<td>User Name :</td>
+				<td><input type="text" name="userName" /></td>
 				<td><form:errors path="userName" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td>Customer Age :</td>
-				<td><form:input path="password" /></td>
+				<td>Password :</td>
+				<td><input type="password" name="password" /></td>
 				<td><form:errors path="password" cssClass="error" /></td>
 			</tr>
 			<tr>

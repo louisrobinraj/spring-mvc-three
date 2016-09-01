@@ -1,4 +1,4 @@
-package com.mkyong.web.controller;
+package com.sjc.hrms.contoller;
 
 import javax.validation.Valid;
 
@@ -8,6 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sjc.hrms.model.LoginBean;
+
 
 @Controller
 public class LoginController {
@@ -37,21 +40,6 @@ public class LoginController {
 			System.out.println("success");
 			return "success";
 		}
-		// if (loginAttributes != null && loginAttributes.getUserName() != null
-		// & loginAttributes.getPassword() != null) {
-		// if (loginAttributes.getUserName().equals("robin") &&
-		// loginAttributes.getPassword().equals("robin123")) {
-		// model.addAttribute("msg", "welcome" + loginAttributes.getUserName());
-		// return "success";
-		// } else {
-		// model.addAttribute("error", "Invalid Details");
-		// return "login";
-		// }
-		// } else {
-		// model.addAttribute("error", "Please enter Details");
-		// return "login";
-		// }
-
 	}
 
 }
