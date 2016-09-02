@@ -24,4 +24,22 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
+
+
+	<mvc:interceptors>  
+			<!-- <bean class="com.sjc.hrms.intercepters.ProcessingTimeInterceptors"/> -->
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			<ref bean="checkRequestTimetHandler" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/l*" />
+			<ref bean="checkMaintananceHandler" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<bean id="checkRequestTimetHandler" class="com.sjc.hrms.intercepters.ProcessingTimeInterceptors" />
+	<bean id="checkMaintananceHandler" class="com.sjc.hrms.intercepters.MaintenanceInterceptor" />
+
+
 </beans>
