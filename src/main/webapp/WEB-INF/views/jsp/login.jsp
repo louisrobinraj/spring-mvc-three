@@ -18,7 +18,7 @@
 
 <body>
 	<h2>Login Page</h2>
-
+	${msg}
 	<form:form method="post" modelAttribute="loginBean" action="doLogin">
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<table>

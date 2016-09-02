@@ -5,15 +5,16 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sjc.hrms.exception.GenericException;
 import com.sjc.hrms.model.LoginBean;
 
-
 @Controller
-public class LoginController {
+public class LoginController extends ParantController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView init(Model model) {
@@ -39,6 +40,15 @@ public class LoginController {
 			model.addAttribute("lfobj", loginBean);
 			System.out.println("success");
 			return "success";
+		}
+	}
+
+	@RequestMapping(value = "/test/{type}", method = RequestMethod.GET)
+	public String test(@PathVariable("type") String type) {
+		if (type.equals("404")) {
+			throw new GenericException("404", "404 exception");
+		} else {
+			throw new GenericException("405", "405 exception");
 		}
 	}
 
