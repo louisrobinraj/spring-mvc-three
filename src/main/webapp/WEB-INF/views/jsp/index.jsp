@@ -13,27 +13,22 @@
 			var json = {
 				"name" : "jenis",
 				"message" : "model"
-				
+
 			};
 
-			
-			
-			
 			$.ajax({
-				  type: "post",
-					url : "http://localhost:9080/spring-mvc-three/save/save-user",
-				  cache: false,    
-				  data:json,
-				  success: function(response){
-				   $('#result').html("");
-				   var obj = JSON.parse(response);
-				   $('#result').html("First Name:- " + obj.firstName +"</br>Last Name:- " + obj.lastName  + "</br>Email:- " + obj.email);
-				  },
-				  error: function(){      
-				   alert('Error while request..');
-				  }
-			 });
-		
+				type : "POST",
+				url : "addData",
+				data : JSON.stringify({
+					userName : "Gerry",
+					password : "Sydney"
+				}),
+				contentType : 'application/json',
+				success : function(data) {
+					alert(data);
+
+				}
+			});
 		});
 	});
 </script>

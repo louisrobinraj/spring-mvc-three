@@ -83,4 +83,14 @@ public class LoginController extends ParantController {
 		return responseEntity;
 	}
 
+	@RequestMapping(value = "/addData", method = RequestMethod.POST, headers = { "Content-type=application/json" })
+	@ResponseBody
+	public ResponseEntity addPerson(@RequestBody LoginBean loginBean) {
+
+		ResponseEntity entity = new ResponseEntity();
+		entity.setName(loginBean.getUserName());
+		entity.setMessgae(loginBean.getPassword());
+		return entity;
+	}
+
 }

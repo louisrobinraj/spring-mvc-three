@@ -19,14 +19,18 @@ public class ProcessingTimeInterceptors extends HandlerInterceptorAdapter {
 
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("postHandle  ProcessingTimeInterceptors!!");
-		long startTime = (Long) request.getAttribute("startTime");
-		request.removeAttribute("startTime");
+		try{
+			System.out.println("postHandle  ProcessingTimeInterceptors!!");
+			long startTime = (Long) request.getAttribute("startTime");
+			request.removeAttribute("startTime");
 
-		long endTime = System.currentTimeMillis();
-		modelAndView.addObject("totalTime", endTime - startTime);
+			long endTime = System.currentTimeMillis();
+			modelAndView.addObject("totalTime", endTime - startTime);
 
-		System.out.println("Request Prcessing Time :: " + (endTime - startTime));
+			System.out.println("Request Prcessing Time :: " + (endTime - startTime));
+		} catch (Exception exception) {
+			System.out.println(exception.getMessage());
+		}
 	}
 
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,

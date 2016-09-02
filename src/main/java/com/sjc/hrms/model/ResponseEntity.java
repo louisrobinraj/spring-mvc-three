@@ -1,7 +1,5 @@
 package com.sjc.hrms.model;
 
-import java.util.List;
-
 public class ResponseEntity {
 
 	private String name;
