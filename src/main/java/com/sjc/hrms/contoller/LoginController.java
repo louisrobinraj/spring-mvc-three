@@ -2,6 +2,7 @@ package com.sjc.hrms.contoller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -117,7 +118,8 @@ public class LoginController extends ParantController {
 
 	@RequestMapping(value = "login.html", method = RequestMethod.POST)
 	public ModelAndView doLogin(@Valid @ModelAttribute("login") LoginBean login, BindingResult bindingresult,
-			HttpSession session) {
+			HttpSession session,HttpServletRequest request,Model model) {
+		 model.addAttribute("msg", "trades request, serving page " + request.getRequestURI());
 		ModelAndView view = new ModelAndView("login");
 		if (!bindingresult.hasErrors()) {
 			if (!loginService.authenticateUser(login)) {
