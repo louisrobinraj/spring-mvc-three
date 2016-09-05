@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ import com.sjc.hrms.model.LoginBean;
 @Controller
 public class LoginController extends ParantController {
 
+	@Autowired
+	private LoginService loginService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView init(Model model) {
 		System.out.println("index request executed ");
