@@ -36,6 +36,6 @@
 <body>
 	<a href="login">Login</a>
 	<a href="singup">Sing Up</a>
-	<button>Get External Content</button>
+	<button>Get Response Body</button>
 </body>
 </html>
