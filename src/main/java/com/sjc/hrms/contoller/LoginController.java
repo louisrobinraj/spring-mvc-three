@@ -2,12 +2,15 @@ package com.sjc.hrms.contoller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sjc.hrms.exception.GenericException;
 import com.sjc.hrms.model.ResponseEntity;
+import com.sjc.hrms.services.LoginService;
 import com.sjc.hrms.model.LoginBean;
 
 @Controller
@@ -24,7 +28,7 @@ public class LoginController extends ParantController {
 
 	@Autowired
 	private LoginService loginService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView init(Model model) {
 		System.out.println("index request executed ");
@@ -97,4 +101,34 @@ public class LoginController extends ParantController {
 		return entity;
 	}
 
+
+	@RequestMapping("login.html")
+	public String toLogin(Model model) {
+		LoginBean login = new LoginBean();
+		model.addAttribute("login", login);
+		return "login";
+	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login.html";
+	}
+
+	@RequestMapping(value = "login.html", method = RequestMethod.POST)
+	public ModelAndView doLogin(@Valid @ModelAttribute("login") LoginBean login, BindingResult bindingresult,
+			HttpSession session) {
+		ModelAndView view = new ModelAndView("login");
+		if (!bindingresult.hasErrors()) {
+			if (!loginService.authenticateUser(login)) {
+				bindingresult.addError(new ObjectError("invalid", "Invalid Credentials!!!"));
+				return new ModelAndView("error");
+			} else {
+				session.setAttribute("login", login);
+				view.setViewName("success");
+			}
+		}
+
+		return view;
+	}
 }

@@ -11,6 +11,8 @@
 
 	<context:component-scan base-package="com.sjc.hrms.contoller" />
 
+	<bean class="com.sjc.hrms.services.impl.LoginServiceImpl" />
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="WEB-INF/views/jsp/" />

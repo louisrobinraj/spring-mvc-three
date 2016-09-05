@@ -1,7 +1,7 @@
 package com.sjc.hrms.services.impl;
 
-import com.sjc.hrms.contoller.LoginService;
 import com.sjc.hrms.model.LoginBean;
+import com.sjc.hrms.services.LoginService;
 
 public class LoginServiceImpl implements LoginService {
 
