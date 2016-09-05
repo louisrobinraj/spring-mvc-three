@@ -22,4 +22,5 @@ public class ParantController {
 		return "/error/generic_error";
 
 	}
+	
 }

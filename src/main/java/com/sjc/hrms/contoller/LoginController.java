@@ -70,6 +70,7 @@ public class LoginController extends ParantController {
 
 	@RequestMapping(value = "/test/{type}", method = RequestMethod.GET)
 	public String test(@PathVariable("type") String type) {
+		
 		if (type.equals("404")) {
 			throw new GenericException("404", "404 exception");
 		} else {
@@ -123,7 +124,7 @@ public class LoginController extends ParantController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/login.html";
+		return "redirect:/login";
 	}
 
 }
