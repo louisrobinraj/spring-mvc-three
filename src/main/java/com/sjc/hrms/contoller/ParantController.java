@@ -2,6 +2,7 @@ package com.sjc.hrms.contoller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -13,11 +14,12 @@ import com.sjc.hrms.exception.GenericException;
 @Controller
 public class ParantController {
 	@ExceptionHandler(GenericException.class)
-	public ModelAndView handleException(GenericException ex, HttpServletResponse response) throws IOException {
-		ModelAndView model = new ModelAndView("/error/generic_error");
+	public String  handleException(GenericException ex, HttpServletResponse response,HttpServletRequest request) throws IOException {
+		System.out.println("error occuered "+request.getRequestURI());
+		ModelAndView model = new ModelAndView();
 		model.addObject("errCode", ex.getErrCode());
 		model.addObject("errMsg", ex.getErrMsg());
-		return model;
+		return "/error/generic_error";
 
 	}
 }
