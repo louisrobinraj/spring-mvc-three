@@ -45,18 +45,25 @@ public class LoginController extends ParantController {
 	}
 
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-	public String saveOrUpdateUser(@Valid LoginBean loginBean, BindingResult result, Model model) {
-		System.out.println("doLogin request executed ");
-		if (result.hasErrors()) {
-			System.out.println("error hash login page");
-			return "login";
-		} else {
-			model.addAttribute("lfobj", loginBean);
-			System.out.println("success");
-			return "success";
+	public ModelAndView doLogin(@Valid @ModelAttribute("loginBean") LoginBean loginBean, BindingResult bindingresult,
+			HttpSession session,HttpServletRequest request,Model model) {
+		 model.addAttribute("msg", "trades request, serving page " + request.getRequestURI());
+		ModelAndView view = new ModelAndView("login");
+		if (!bindingresult.hasErrors()) {
+			if (!loginService.authenticateUser(loginBean)) {
+				bindingresult.addError(new ObjectError("invalid", "Invalid Credentials!!!"));
+				return new ModelAndView("login");
+			} else {
+				session.setAttribute("login", loginBean);
+				view.setViewName("success");
+			}
 		}
-	}
 
+		return view;
+	}
+	
+	
+	
 	@RequestMapping(value = "/test/{type}", method = RequestMethod.GET)
 	public String test(@PathVariable("type") String type) {
 		if (type.equals("404")) {
@@ -116,21 +123,4 @@ public class LoginController extends ParantController {
 		return "redirect:/login.html";
 	}
 
-	@RequestMapping(value = "login.html", method = RequestMethod.POST)
-	public ModelAndView doLogin(@Valid @ModelAttribute("login") LoginBean login, BindingResult bindingresult,
-			HttpSession session,HttpServletRequest request,Model model) {
-		 model.addAttribute("msg", "trades request, serving page " + request.getRequestURI());
-		ModelAndView view = new ModelAndView("login");
-		if (!bindingresult.hasErrors()) {
-			if (!loginService.authenticateUser(login)) {
-				bindingresult.addError(new ObjectError("invalid", "Invalid Credentials!!!"));
-				return new ModelAndView("error");
-			} else {
-				session.setAttribute("login", login);
-				view.setViewName("success");
-			}
-		}
-
-		return view;
-	}
 }

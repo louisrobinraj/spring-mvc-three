@@ -7,6 +7,9 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public boolean authenticateUser(LoginBean login) {
+		if (login.getUserName().equals("robin") && login.getPassword().equals("robin123")) {
+			return true;
+		}
 		return false;
 	}
 
