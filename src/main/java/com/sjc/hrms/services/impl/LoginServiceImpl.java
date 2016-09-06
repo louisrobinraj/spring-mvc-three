@@ -19,19 +19,23 @@ import com.sjc.hrms.services.LoginService;
 public class LoginServiceImpl implements LoginService {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+	public static final String indexPageName = "index";
+	public static final String loginPageName = "login";
+	public static final String successnPageName = "success";
+
 	@Override
 	public ModelAndView authenticateUser(@Valid @ModelAttribute("loginBean") LoginBean loginBean,
 			BindingResult bindingresult, HttpSession session, HttpServletRequest request, Model model) {
-		ModelAndView view = new ModelAndView("login");
+		ModelAndView view = new ModelAndView(loginPageName);
 		if (!bindingresult.hasErrors()) {
 			if (!(loginBean.getUserName().equals("robin"))) {
 				bindingresult.addError(new ObjectError("invalid", "Invalid Credentials!!!"));
 				logger.error("invalid credential");
-				view.setViewName("login");
+				view.setViewName(loginPageName);
 			} else {
 				session.setAttribute("Login_userName", loginBean.getUserName());
 				logger.debug("login user -->" + session.getAttribute("Login_userName"));
-				view.setViewName("success");
+				view.setViewName(successnPageName);
 			}
 		}
 
@@ -40,10 +44,10 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public Model viewLoginPage(Model model) {
+	public ModelAndView viewLoginPage(Model model) {
 		model.addAttribute("loginBean", new LoginBean());
 		model.addAttribute("msg", "Please Enter Your Login Details");
-		return model ;
+		return new ModelAndView(loginPageName);
 	}
 
 }

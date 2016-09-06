@@ -1,0 +1,11 @@
+@RequestMapping(value = "/test/{type}", method = RequestMethod.GET)
+	public String test(@PathVariable("type") String type) {
+
+		if (type.equals("404")) {
+			throw new GenericException("404", "404 exception");
+		} else {
+			throw new GenericException("405", "405 exception");
+		}
+	}
+	
+	for exception 

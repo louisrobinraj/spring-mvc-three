@@ -15,7 +15,7 @@ public interface LoginService {
 
 	public ModelAndView authenticateUser(@Valid @ModelAttribute("loginBean") LoginBean loginBean, BindingResult bindingresult,HttpSession session, HttpServletRequest request, Model model);
 
-	public Model viewLoginPage(Model model);
+	public ModelAndView viewLoginPage(Model model);
 	
 
 }
