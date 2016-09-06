@@ -6,13 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,48 +26,31 @@ import com.sjc.hrms.model.LoginBean;
 @Controller
 public class LoginController extends ParantController {
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
+	public static final  String indexPageName="index";
+	public static final  String loginPageName="login";
+	
 	@Autowired
 	private LoginService loginService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView init(Model model, HttpSession session) {
-		logger.info("index request executed ");
-		return new ModelAndView("index");
+	public ModelAndView initApp() {
+		return new ModelAndView(indexPageName);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(Model model) {
-		logger.info("login request executed ");
-		model.addAttribute("loginBean", new LoginBean());
-		model.addAttribute("msg", "Please Enter Your Login Details");
-		return new ModelAndView("login");
+	public ModelAndView viewLoginPage(Model model) {
+		model=loginService.viewLoginPage(model);
+		return new ModelAndView(loginPageName); 
 	}
 
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-	public ModelAndView doLogin(@Valid @ModelAttribute("loginBean") LoginBean loginBean, BindingResult bindingresult,
-			HttpSession session, HttpServletRequest request, Model model) {
-		model.addAttribute("msg", "trades request, serving page " + request.getRequestURI());
-		ModelAndView view = new ModelAndView("login");
-		if (!bindingresult.hasErrors()) {
-			if (!loginService.authenticateUser(loginBean)) {
-				bindingresult.addError(new ObjectError("invalid", "Invalid Credentials!!!"));
-				logger.error("invalid credential");
-				return new ModelAndView("login");
-			} else {
-				session.setAttribute("Login_userName", loginBean.getUserName());
-				logger.debug("login user -->" + session.getAttribute("Login_userName"));
-				view.setViewName("success");
-			}
-		}
-
-		return view;
+	public ModelAndView doLogin(@Valid @ModelAttribute("loginBean") LoginBean loginBean, BindingResult bindingresult,HttpSession session, HttpServletRequest request, Model model) {
+		return loginService.authenticateUser(loginBean, bindingresult, session, request, model);
 	}
 
 	@RequestMapping(value = "/test/{type}", method = RequestMethod.GET)
 	public String test(@PathVariable("type") String type) {
-		
+
 		if (type.equals("404")) {
 			throw new GenericException("404", "404 exception");
 		} else {
@@ -98,7 +78,7 @@ public class LoginController extends ParantController {
 	}
 
 	@RequestMapping(value = "/save/save-user", method = RequestMethod.POST)
-	public ResponseEntity saveCompetitorDimension(@RequestBody ResponseEntity responseEntity) {
+	public ResponseEntity saveData(@RequestBody ResponseEntity responseEntity) {
 		System.out.println("Name :: " + responseEntity.getName());
 		System.out.println("Message :: " + responseEntity.getMessgae());
 		return responseEntity;
@@ -112,13 +92,6 @@ public class LoginController extends ParantController {
 		entity.setName(loginBean.getUserName());
 		entity.setMessgae(loginBean.getPassword());
 		return entity;
-	}
-
-	@RequestMapping("login.html")
-	public String toLogin(Model model) {
-		LoginBean login = new LoginBean();
-		model.addAttribute("login", login);
-		return "login";
 	}
 
 	@RequestMapping("/logout")

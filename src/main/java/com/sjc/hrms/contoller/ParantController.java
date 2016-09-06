@@ -19,16 +19,16 @@ public class ParantController {
 	@ExceptionHandler(GenericException.class)
 	public String handleException(GenericException ex, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
-		System.out.println("error occuered " + request.getRequestURI());
 		ModelAndView model = new ModelAndView();
 		model.addObject("errCode", ex.getErrCode());
 		model.addObject("errMsg", ex.getErrMsg());
 		return "redirect:/error";
 
 	}
-	@RequestMapping(value = "/error", method = RequestMethod.GET)
-	public ModelAndView login(Model model) {
-		System.out.println("going to executed eoror page");
-		return new ModelAndView("error/generic_error");
-	}
+
+//	@RequestMapping(value = "/error", method = RequestMethod.GET)
+//	public ModelAndView login(Model model) {
+//		return new ModelAndView("error/generic_error");
+//	}
+
 }

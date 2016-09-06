@@ -4,38 +4,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<title>Menu Page</title>
-<script>
-	$(document).ready(function() {
-		$("button").click(function() {
-			var json = {
-				"name" : "jenis",
-				"message" : "model"
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<!-- <title>Menu Page</title> -->
+<!-- <script> -->
+// 	$(document).ready(function() {
+// 		$("button").click(function() {
+// 			var json = {
+// 				"name" : "jenis",
+// 				"message" : "model"
 
-			};
+// 			};
 
-			$.ajax({
-				type : "POST",
-				url : "addData",
-				data : JSON.stringify({
-					userName : "Gerry",
-					password : "Sydney"
-				}),
-				contentType : 'application/json',
-				success : function(data) {
-					alert(data);
+// 			$.ajax({
+// 				type : "POST",
+// 				url : "addData",
+// 				data : JSON.stringify({
+// 					userName : "Gerry",
+// 					password : "Sydney"
+// 				}),
+// 				contentType : 'application/json',
+// 				success : function(data) {
+// 					alert(data);
 
-				}
-			});
-		});
-	});
-</script>
+// 				}
+// 			});
+// 		});
+// 	});
+<!-- </script> -->
 </head>
 <body>
 	<a href="login">Login</a>
 	<a href="singup">Sing Up</a>
-	<button>Get Response Body</button>
 </body>
 </html>
