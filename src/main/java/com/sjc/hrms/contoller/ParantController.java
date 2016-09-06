@@ -28,6 +28,7 @@ public class ParantController {
 	}
 	@RequestMapping(value = "/error", method = RequestMethod.GET)
 	public ModelAndView login(Model model) {
+		System.out.println("going to executed eoror page");
 		return new ModelAndView("error/generic_error");
 	}
 }
