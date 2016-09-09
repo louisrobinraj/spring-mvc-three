@@ -12,13 +12,15 @@
 	<context:component-scan base-package="com.sjc.hrms.contoller" />
 
 	<bean class="com.sjc.hrms.services.impl.LoginServiceImpl" />
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="WEB-INF/views/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
 		<property name="basename" value="messages" />
 	</bean>
 
@@ -26,8 +28,8 @@
 	<mvc:annotation-driven />
 
 
-	<mvc:interceptors>  
-			<!-- <bean class="com.sjc.hrms.intercepters.ProcessingTimeInterceptors"/> -->
+	<mvc:interceptors>
+		<!-- <bean class="com.sjc.hrms.intercepters.ProcessingTimeInterceptors"/> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/*" />
 			<ref bean="checkRequestTimetHandler" />
@@ -41,5 +43,6 @@
 	<bean id="checkRequestTimetHandler" class="com.sjc.hrms.intercepters.ProcessingTimeInterceptors" />
 	<bean id="checkMaintananceHandler" class="com.sjc.hrms.intercepters.MaintenanceInterceptor" />
 
+	<import resource="classpath*:application-context.xml" />
 
 </beans>
