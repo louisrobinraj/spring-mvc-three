@@ -1,4 +1,4 @@
-package com.sjc.hrms.contoller;
+package com.sjc.hrms.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,17 +20,13 @@ import com.sjc.hrms.services.LoginService;
 public class LoginController extends ParantController {
 
 	public static final String indexPageName = "index";
+	
 	@Autowired
 	private LoginService loginService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView initApp() {
 		return new ModelAndView(indexPageName);
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView viewLoginPage(Model model) {
-		return loginService.viewLoginPage(model);
 	}
 
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)

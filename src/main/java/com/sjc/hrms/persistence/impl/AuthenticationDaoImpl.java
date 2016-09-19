@@ -15,8 +15,8 @@ public class AuthenticationDaoImpl extends BaseJpaDAO<LoginBean> implements Auth
 	}
 
 	@Override
-	public LoginBean checkUserCredantial(String regionName) {
-		return null;
+	public LoginBean checkUserCredantial(String userName,String password) {
+		return queryFor("select obj from LoginBean obj where obj.userName=?1 and obj.password=?2",userName,password);
 	}
 
 }

@@ -18,3 +18,76 @@ Autowired
 	private SampleDao bpmRegionDao;
 	context.xml
 	<bean class="SampleDaoImpl" />
+	
+	
+		<import resource="classpath*:application-context.xml" />
+		
+		
+		
+		@RequestMapping(value = "getResponse/{name}", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity getShopInJSON(@PathVariable String name) {
+
+		ResponseEntity entity = new ResponseEntity();
+		entity.setMessgae("HI");
+		entity.setName(name);
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("robin1");
+		list.add("robin2");
+		list.add("robin3");
+		list.add("robin4");
+		list.add("robin5");
+		list.add("robin6");
+		list.add("robin7");
+		list.add("robin8");
+		return entity;
+
+	}
+
+	@RequestMapping(value = "/save/save-user", method = RequestMethod.POST)
+	public ResponseEntity saveData(@RequestBody ResponseEntity responseEntity) {
+		System.out.println("Name :: " + responseEntity.getName());
+		System.out.println("Message :: " + responseEntity.getMessgae());
+		return responseEntity;
+	}
+
+	@RequestMapping(value = "/addData", method = RequestMethod.POST, headers = { "Content-type=application/json" })
+	@ResponseBody
+	public ResponseEntity addPerson(@RequestBody LoginBean loginBean) {
+
+		ResponseEntity entity = new ResponseEntity();
+		entity.setName(loginBean.getUserName());
+		entity.setMessgae(loginBean.getPassword());
+		return entity;
+	}
+	
+	
+	
+	
+	<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<!-- <title>Menu Page</title> -->
+<!-- <script> -->
+// 	$(document).ready(function() {
+// 		$("button").click(function() {
+// 			var json = {
+// 				"name" : "jenis",
+// 				"message" : "model"
+
+// 			};
+
+// 			$.ajax({
+// 				type : "POST",
+// 				url : "addData",
+// 				data : JSON.stringify({
+// 					userName : "Gerry",
+// 					password : "Sydney"
+// 				}),
+// 				contentType : 'application/json',
+// 				success : function(data) {
+// 					alert(data);
+
+// 				}
+// 			});
+// 		});
+// 	});
+<!-- </script> -->

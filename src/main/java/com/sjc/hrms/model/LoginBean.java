@@ -1,9 +1,18 @@
 package com.sjc.hrms.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
+@Table(name = "LoginBean")
 public class LoginBean {
-
+	@Id
+	@GeneratedValue
+	private int id;
 	@NotEmpty
 	private String userName;
 	@NotEmpty

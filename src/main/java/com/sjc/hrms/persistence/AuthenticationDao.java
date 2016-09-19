@@ -5,5 +5,5 @@ import com.sjc.hrms.model.LoginBean;
 
 public interface AuthenticationDao extends JpaDAO<LoginBean> {
 
-	public LoginBean checkUserCredantial(String regionName);
+	public LoginBean checkUserCredantial(String regionName,String password);
 }
