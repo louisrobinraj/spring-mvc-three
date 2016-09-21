@@ -17,4 +17,6 @@ public interface JpaDAO<EntityType> {
 	EntityType saveOrUpdate(EntityType entity);
 
 	void delete(EntityType e);
+
+	public EntityType findByName(String name);
 }
