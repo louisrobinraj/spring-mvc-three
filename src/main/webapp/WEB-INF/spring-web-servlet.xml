@@ -7,20 +7,17 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<context:component-scan
-		base-package="com.sjc.hrms.services.*,com.sjc.hrms.controller" />
+	<context:component-scan	base-package="com.sjc.hrms.services.*,com.sjc.hrms.controller" />
 
 	<bean class="com.sjc.hrms.services.impl.LoginServiceImpl" />
 	<bean class="com.sjc.hrms.persistence.impl.AuthenticationDaoImpl" />
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="WEB-INF/views/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
-		id="messageSource">
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
 		<property name="basename" value="messages" />
 	</bean>
 
@@ -79,8 +76,7 @@
 		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
 		<property name="database" value="MYSQL" />
 	</bean>
-	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
-		id="transactionManager">
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"	id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
